@@ -22,4 +22,30 @@ public class PlayerManager : MonoBehaviour
         _instance = this;
 
     }
+
+    public void WeaponAttack(Stats target)
+    {
+        if (!playerStats.HaveWeapon)
+        {
+            CombatManager.Instance.PhysicAttack(target, playerStats.CurrentStrength);
+        }
+    }
+
+    public void CheckDeath()
+    {
+        if(playerStats.CurrentHealthPoints <= 0)
+        {
+
+            Death();
+
+        }
+    }
+
+    public void Death()
+    {
+        Debug.Log("Jugador muerto");
+        playerStats.CurrentHealthPoints = playerStats.HealthPoints;
+        // QUITAR DINERO POR PENALIZACION DE MUERTE? PENSAR PENALIZACIONES
+        // OTRA PENALIZACION SERIA BAJAR DURABILIDAD DE EQUIPAMIENTO 
+    }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "MultipliedDMGEffect", menuName = "Effect/MultipliedDMG")]
 public class MultipliedDamage : SkillEffect
 {
 
@@ -10,22 +11,26 @@ public class MultipliedDamage : SkillEffect
     private int percentajeOfDamage;
 
     [SerializeField]
-    private SkillData.DamageType damageType;
+    private Data.DamageType damageType;
 
-    public override void ACtivateEffect(Stats user,Stats target)
+    public override void ActivateEffect(Stats user,Stats target)
     {
         switch (damageType)
         {
-            case SkillData.DamageType.Physic:
+            case Data.DamageType.Physic:
 
-                
+                Debug.Log("Daño fisico");
 
                 break;
 
-            case SkillData.DamageType.Magic:
+            case Data.DamageType.Magic:
+
+                Debug.Log("Daño magico");
                 break;
 
-            case SkillData.DamageType.True:
+            case Data.DamageType.True:
+
+                Debug.Log("Daño verdadero");
                 break;
 
         }

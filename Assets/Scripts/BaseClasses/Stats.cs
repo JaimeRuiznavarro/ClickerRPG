@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,20 +6,27 @@ using UnityEngine.UI;
 
 public class Stats : MonoBehaviour
 {
+
     [Header("Stats")]
     [Header("MainStast")]
-    [SerializeField][Tooltip("Estadistica que indica la vida")]
-    protected int healthPoints;
-    [SerializeField][Tooltip("Estadistica que aumenta el daño fisico")]
-    protected int strength;
-    [SerializeField][Tooltip("Estadistica que aumenta el daño magico")]
-    protected int magic;
-    [SerializeField][Tooltip("Estadistica que aumenta la probabilidad de critico")]
-    protected int dexterity;
-    [SerializeField][Tooltip("Estadistica que aumenta la defensa fisica")]
-    protected int physicArmor;
-    [SerializeField][Tooltip("Estadistica que aumenta la defensa magica")]
-    protected int magicArmor;
+    [SerializeField]
+    [Tooltip("Estadistica que indica la vida")]
+    private int healthPoints;
+    [SerializeField]
+    [Tooltip("Estadistica que aumenta el daño fisico")]
+    private int strength;
+    [SerializeField]
+    [Tooltip("Estadistica que aumenta el daño magico")]
+    private int magic;
+    [SerializeField]
+    [Tooltip("Estadistica que aumenta la probabilidad de critico")]
+    private int dexterity;
+    [SerializeField]
+    [Tooltip("Estadistica que aumenta la defensa fisica")]
+    private int physicArmor;
+    [SerializeField]
+    [Tooltip("Estadistica que aumenta la defensa magica")]
+    private int magicArmor;
 
     [Header("SecondaryStast")]
     [SerializeField][Tooltip("Estadistica que indica la probabilidad de acertar un golpe")]
@@ -31,57 +39,61 @@ public class Stats : MonoBehaviour
     [Header("CurrentStats")]
     [Header("MainStats")]
     [SerializeField]
-    protected int currentHealthPoints;
+    private int currentHealthPoints;
     [SerializeField]
-    protected int currentStrength;
+    private int currentStrength;
     [SerializeField]
-    protected int currentMagic;
+    private int currentMagic;
     [SerializeField]
-    protected int currentDexterity;
+    private int currentDexterity;
     [SerializeField]
-    protected int currentPhysicArmor;
+    private int currentPhysicArmor;
     [SerializeField]
-    protected int currentMagicArmor;
+    private int currentMagicArmor;
 
     [Header("SecondaryStast")]
     [SerializeField]
-    protected int currentAccuracy;
+    private int currentAccuracy;
     [SerializeField]
-    protected int currentEvasion;
+    private int currentEvasion;
 
     [Header("References")]
     [SerializeField]
-    protected Image hpBar;
+    private Image hpBar;
+
+    public int CurrentHealthPoints { get => currentHealthPoints; set => currentHealthPoints = value; }
+    public int CurrentMagicArmor { get => currentMagicArmor; set => currentMagicArmor = value; }
+    public int CurrentPhysicArmor { get => currentPhysicArmor; set => currentPhysicArmor = value; }
+    public int CurrentDexterity { get => currentDexterity; set => currentDexterity = value; }
+    public int CurrentMagic { get => currentMagic; set => currentMagic = value; }
+    public int CurrentStrength { get => currentStrength; set => currentStrength = value; }
+    public int CurrentAccuracy { get => currentAccuracy; set => currentAccuracy = value; }
+    public int CurrentEvasion { get => currentEvasion; set => currentEvasion = value; }
+    public Image HpBar { get => hpBar; set => hpBar = value; }
+    public int HealthPoints { get => healthPoints; set => healthPoints = value; }
+    public int Strength { get => strength; set => strength = value; }
+    public int Magic { get => magic; set => magic = value; }
+    public int Dexterity { get => dexterity; set => dexterity = value; }
+    public int PhysicArmor { get => physicArmor; set => physicArmor = value; }
+    public int MagicArmor { get => magicArmor; set => magicArmor = value; }
+
     public void InitializeStats()
     {
-        currentHealthPoints = healthPoints;
-        currentStrength = strength;
-        currentMagic = magic;
-        currentDexterity = dexterity;
-        currentPhysicArmor = physicArmor;
-        currentMagicArmor = magicArmor;
-        currentAccuracy = accuracy;
-        currentEvasion = evasion;
+        currentHealthPoints = HealthPoints;
+        CurrentStrength = Strength;
+        CurrentMagic = Magic;
+        CurrentDexterity = Dexterity;
+        CurrentPhysicArmor = PhysicArmor;
+        CurrentMagicArmor = MagicArmor;
+        CurrentAccuracy = accuracy;
+        CurrentEvasion = evasion;
     }
 
     public void RecieveDamage(int damage)
     {
         currentHealthPoints -= damage;
-        hpBar.fillAmount = (float)currentHealthPoints / healthPoints;
+        HpBar.fillAmount = (float)currentHealthPoints / HealthPoints;
 
-    }
-
-    public void RecievePhysicDamage(int dmg)
-    {
-
-        int damage = Mathf.Clamp(dmg - currentPhysicArmor, 1, 9999);
-
-        RecieveDamage(damage);
-
-    }
-    public int GetPhysicDamage()
-    {
-        return currentStrength ;
     }
 
 

@@ -22,3 +22,6 @@ MonoBehaviour:
   evasion: 0
   timeBetweenAttacks: 2
   sprite: {fileID: 21300000, guid: a6918d2865181cd40b9da4bf49fdc35a, type: 3}
+  skillsList:
+  - {fileID: 11400000, guid: e0042178d277b8c4d95e794da6278b22, type: 2}
+  lootList: []

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class SkillEffect : MonoBehaviour
+public class SkillEffect : ScriptableObject
 {
 
 
-    public abstract void ACtivateEffect(Stats user, Stats target);
+    public virtual void ActivateEffect(Stats user, Stats target)
+    {
+
+    }
 
 
 

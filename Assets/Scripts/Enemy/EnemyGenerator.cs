@@ -12,6 +12,8 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     private EnemyStats targetEnemy;
     [SerializeField]
+    private EnemyManager enemyManager;
+    [SerializeField]
     private SpriteRenderer enemySprite;
 
     private static EnemyGenerator _instance;
@@ -38,6 +40,7 @@ public class EnemyGenerator : MonoBehaviour
         Enemy aux = enemyList[Random.Range(0, enemyList.Length)];
         targetEnemy.SetUpEnemy(aux);
         enemySprite.sprite = aux.sprite;
+        enemyManager.SkillsList = aux.skillsList;
     }
 
 }

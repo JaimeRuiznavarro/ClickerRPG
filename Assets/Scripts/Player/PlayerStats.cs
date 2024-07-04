@@ -10,20 +10,15 @@ public class PlayerStats : Stats
 
     [SerializeField]
     private bool haveWeapon;
-    
+
+    public bool HaveWeapon { get => haveWeapon; set => haveWeapon = value; }
+
     void Start()
     {
         //UI
         InitializeStats();
-        hpBar.fillAmount = (float)currentHealthPoints / healthPoints;
+        HpBar.fillAmount = (float)CurrentHealthPoints / HealthPoints;
 
-    }
-    public void WeaponAttack(Stats target)
-    {
-        if (!haveWeapon)
-        {
-            target.RecievePhysicDamage(currentStrength);
-        }
     }
 
 }

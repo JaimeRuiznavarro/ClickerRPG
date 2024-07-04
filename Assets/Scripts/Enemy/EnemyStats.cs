@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class EnemyStats : Stats
     private float timeBetweenAttacks;
     [Header("Exclusive Current Stats")]
     [SerializeField]
-    private float currentTimeBetweenAttacks; 
+    public float currentTimeBetweenAttacks;
 
 
     [Header("References")]
@@ -20,90 +21,47 @@ public class EnemyStats : Stats
     // Utility
     private bool canAttack = false;
 
+    public bool CanAttack { get => canAttack; set => canAttack = value; }
+    public Loot.LootData[] LootList { get => lootList; set => lootList = value; }
 
-    void Update()
+    public void ResetAttackCooldown()
     {
-        // Ver si se puede poner en mejor sitio
-        CheckDeath();
-        currentTimeBetweenAttacks -= Time.deltaTime;
-        if(currentTimeBetweenAttacks <= 0)
-        {
-            currentTimeBetweenAttacks = timeBetweenAttacks;
-            Attack();
-            
-        }
-
+        currentTimeBetweenAttacks = timeBetweenAttacks;
     }
+
     public void SetUpEnemy(Enemy enemy)
     {
         //UI
-        hpBar.fillAmount = enemy.healthPoints / enemy.healthPoints;
+        HpBar.fillAmount = enemy.healthPoints / enemy.healthPoints;
         //Current Stats
-        currentHealthPoints = enemy.healthPoints;
-        currentStrength = enemy.strength;
-        currentMagic = enemy.magic;
-        currentDexterity = enemy.dexterity;
-        currentPhysicArmor = enemy.physicArmor;
-        currentMagicArmor = enemy.magicArmor;
-        currentAccuracy = enemy.accuracy;
-        currentEvasion = enemy.evasion;
+        CurrentHealthPoints = enemy.healthPoints;
+        CurrentStrength = enemy.strength;
+        CurrentMagic = enemy.magic;
+        CurrentDexterity = enemy.dexterity;
+        CurrentPhysicArmor = enemy.physicArmor;
+        CurrentMagicArmor = enemy.magicArmor;
+        CurrentAccuracy = enemy.accuracy;
+        CurrentEvasion = enemy.evasion;
         currentTimeBetweenAttacks = enemy.timeBetweenAttacks;
         //Base stats
-        healthPoints = enemy.healthPoints;
-        strength = enemy.strength;
-        magic = enemy.magic;
-        dexterity = enemy.dexterity;
-        physicArmor = enemy.physicArmor;
-        magicArmor = enemy.magicArmor;
+        HealthPoints = enemy.healthPoints;
+        Strength = enemy.strength;
+        Magic = enemy.magic;
+        Dexterity = enemy.dexterity;
+        PhysicArmor = enemy.physicArmor;
+        MagicArmor = enemy.magicArmor;
         accuracy = enemy.accuracy;
         evasion = enemy.evasion;
         timeBetweenAttacks = enemy.timeBetweenAttacks;
 
         //Loot
-        lootList = enemy.lootList;
+        LootList = enemy.lootList;
 
         //Utility
         currentTimeBetweenAttacks = timeBetweenAttacks;
-        canAttack = true;
-
-    }
-    
-    private void CheckDeath()
-    {
-        if(currentHealthPoints <= 0)
-        {
-            Death();
-        }
+        CanAttack = true;
     }
 
-    private void Death()
-    {
-        //Debug.Log("Enemigo Muerto");
-        DropLoot();
-        canAttack = false;
-        EnemyGenerator.Instance.SpawnEnemy();
-    }
-
-    private void DropLoot()
-    {
-        foreach (Loot.LootData item in lootList)
-        {
-            item.GetLoot();
-        }
-    }
-
-    private void OnMouseDown()
-    {
-        //Debug.Log("Clicado");
-        PlayerManager.Instance.playerStats.WeaponAttack(this);
-        
-    }
-
-    private void Attack()
-    {
-        PlayerManager.Instance.playerStats.RecievePhysicDamage(currentStrength);
-
-    }
 
 
 }

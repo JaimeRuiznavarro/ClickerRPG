@@ -45,7 +45,7 @@ public class Enemy : ScriptableObject
 
     [Header("Skills")]
     [SerializeField]
-    private Skill[] skillsList;
+    public Skill[] skillsList;
 
     [Header("Loot")]
     [SerializeField][Tooltip("Lista de recompensas posibles al matar al enemigo")]

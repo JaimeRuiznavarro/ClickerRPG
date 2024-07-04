@@ -23,6 +23,16 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    void Update()
+    {
+
+        if (PassiveManager.Instance.AutoAttackPassive)
+        {
+
+        }
+
+    }
+
     public void WeaponAttack(Stats target)
     {
         if (!playerStats.HaveWeapon)
